@@ -66,6 +66,9 @@ public class WaterFloat : MonoBehaviour
         var waterLineDelta = newWaterLine - WaterLine;
         WaterLine = newWaterLine;
 
+        //compute up vector
+        TargetUp = PhysicsHelper.GetNormal(WaterLinePoints);
+
         //gravity
         var gravity = Physics.gravity;
         rigidBody.drag = AirDrag;
@@ -130,6 +133,7 @@ public class WaterFloat : MonoBehaviour
         {
             Gizmos.color = Color.blue;
             Gizmos.DrawCube(new Vector3(Center.x, WaterLine, Center.z), Vector3.one * 0.3f);
+            Gizmos.DrawRay(new Vector3(Center.x, WaterLine, Center.z), TargetUp * 1f);
         }
         
     }

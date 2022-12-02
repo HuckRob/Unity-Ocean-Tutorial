@@ -63,5 +63,11 @@ public class WaterBoat : MonoBehaviour
         {
             PhysicsHelper.ApplyForceToReachVelocity(rigidbody,forward * -MaxSpeed, Power);
         }
+
+        //moving forward
+        var movingForward = Vector3.Cross(transform.forward, rigidbody.velocity).y < 0;
+
+        //move in direction
+        rigidbody.velocity = Quaternion.AngleAxis(Vector3.SignedAngle(rigidbody.velocity, (movingForward ? 1f : 0f) * transform.forward, Vector3.up) * Drag, Vector3.up) * rigidbody.velocity;
     }
 }
